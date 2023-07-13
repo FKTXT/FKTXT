@@ -1,0 +1,5 @@
+import subprocess
+runthismf = "test inject python"
+
+# Run the file using subprocess
+subprocess.call(["python", runthismf])

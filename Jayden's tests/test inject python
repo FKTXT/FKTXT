@@ -1,0 +1,33 @@
+import bluetooth
+
+#   do not delete >
+devices = bluetooth.discover_devices()
+sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM) 
+# < do not delete
+
+#------- first way
+
+# for addr in devices:
+#     print("Device list:" "\n", devices)
+
+# target_address = devices[0]
+
+# sock.connect((target_address, 1)) 
+# sock.send("SCREEN_OFF") 
+# sock.close()
+
+#------- second way
+
+for target_address in devices:
+    try:
+        
+        sock.connect((target_address, 1))
+        sock.send("SCREEN_OFF")
+        sock.close()
+        
+    except Exception as e:
+        pass
+
+print("FKTXT")
+
+
