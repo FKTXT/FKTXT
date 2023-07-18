@@ -1,0 +1,70 @@
+# same thing as test 1 except added detecting distance between two hands 
+# not sure which one works better
+import cv2
+import mediapipe as mp
+import math
+import time
+
+def detect_hands():
+    mp_hands = mp.solutions.hands
+    hands = mp_hands.Hands()
+
+    cap = cv2.VideoCapture(0)
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        image.flags.writeable = False
+
+        results = hands.process(image)
+
+        if results.multi_hand_landmarks:
+            for hand_landmarks in results.multi_hand_landmarks:
+                for landmark in hand_landmarks.landmark:
+                    x = int(landmark.x * frame.shape[1])
+                    y = int(landmark.y * frame.shape[0])
+                    cv2.circle(frame, (x, y), 5, (0, 255, 0), -1)
+
+            hand_distance = calculate_hand_distance(hand_landmarks, frame.shape[1])
+            print("Distance between the hands:", hand_distance)
+
+            if hand_distance > 400:
+                inject_file()
+                time.sleep(5)
+            # if distance between the two hands is more than 400 inject the code
+
+        else:
+            inject_file()
+            time.sleep(5)
+
+        cv2.imshow('Hand Detection', frame)
+
+        if cv2.waitKey(1) == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+def calculate_hand_distance(hand_landmarks, frame_width):
+    x_coordinates = [lm.x for lm in hand_landmarks.landmark]
+    y_coordinates = [lm.y for lm in hand_landmarks.landmark]
+    z_coordinates = [lm.z for lm in hand_landmarks.landmark]
+
+    thumb_tip_x = x_coordinates[mp.solutions.hands.HandLandmark.THUMB_TIP.value]
+    thumb_tip_y = y_coordinates[mp.solutions.hands.HandLandmark.THUMB_TIP.value]
+    index_tip_x = x_coordinates[mp.solutions.hands.HandLandmark.INDEX_FINGER_TIP.value]
+    index_tip_y = y_coordinates[mp.solutions.hands.HandLandmark.INDEX_FINGER_TIP.value]
+
+    hand_distance = math.sqrt((thumb_tip_x - index_tip_x)**2 + (thumb_tip_y - index_tip_y)**2)
+    hand_distance = hand_distance * frame_width
+
+    return hand_distance
+
+def inject_file():
+    print("Injecting file...")
+    # change to file that will become the injecter /inject when i fix it
+
+detect_hands()
