@@ -6,7 +6,7 @@ import os
 
 def on_press(key):
     print('{0} pressed'.format(key))
-    os.system("shutdown -s")
+    # os.system("shutdown -s")
 
 
 

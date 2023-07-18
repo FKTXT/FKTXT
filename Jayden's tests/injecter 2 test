@@ -1,3 +1,0 @@
-import subprocess
-runthismf = "test inject python"
-subprocess.call(["python", runthismf])

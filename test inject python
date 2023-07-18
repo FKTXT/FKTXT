@@ -1,6 +1,8 @@
 import bluetooth
 import socket 
 import pyautogui
+from pynput.keyboard import Key, Listener
+
 #   do not delete >
 devices = bluetooth.discover_devices()
 sock = bluetooth.BluetoothSocket(bluetooth.Protocol.RFCOMM) 
@@ -18,6 +20,8 @@ sock = bluetooth.BluetoothSocket(bluetooth.Protocol.RFCOMM)
 # sock.close()
 
 #------- second way
+def on_press(key):
+    print('{0} pressed'.format(key))
 
 for target_address in devices:
     try:
