@@ -1,5 +1,6 @@
 import cv2
 import mediapipe as mp
+import time
 
 def detect_hands():
     mp_hands = mp.solutions.hands
@@ -26,6 +27,7 @@ def detect_hands():
 
         else:
             inject_file()
+            time.sleep(5)
 
         cv2.imshow('Hand Detection', frame)
 
@@ -39,5 +41,30 @@ def detect_hands():
 def inject_file():
     print("Injecting file...")
     # change to file that will become the injecter /inject when i fix it
+
+detect_hands()
+# detect distance of hands too 
+def calculate_hand_distance(hand_landmarks, frame_width):
+    # Get the x, y, and z coordinates of the hand landmarks
+    x_coordinates = [lm.x for lm in hand_landmarks.landmark]
+    y_coordinates = [lm.y for lm in hand_landmarks.landmark]
+    z_coordinates = [lm.z for lm in hand_landmarks.landmark]
+
+    # Calculate the distance between the thumb tip and the index finger tip
+    thumb_tip_x = x_coordinates[mp.solutions.hands.HandLandmark.THUMB_TIP.value]
+    thumb_tip_y = y_coordinates[mp.solutions.hands.HandLandmark.THUMB_TIP.value]
+    index_tip_x = x_coordinates[mp.solutions.hands.HandLandmark.INDEX_FINGER_TIP.value]
+    index_tip_y = y_coordinates[mp.solutions.hands.HandLandmark.INDEX_FINGER_TIP.value]
+
+    # Calculate the distance using the Euclidean distance formula
+    hand_distance = math.sqrt((thumb_tip_x - index_tip_x)**2 + (thumb_tip_y - index_tip_y)**2)
+
+    # Map the distance to the frame width
+    hand_distance = hand_distance * frame_width
+
+    return hand_distance
+
+def inject_file():
+    print("Injecting file...")
 
 detect_hands()
