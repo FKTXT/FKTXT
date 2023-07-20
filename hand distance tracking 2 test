@@ -33,7 +33,7 @@ def detect_hands():
 
             if hand_distance > 400:
                 inject_file()
-                time.sleep(5)
+                time.sleep(0.5)
             # if distance between the two hands is more than 400 inject the code
 
         else:
