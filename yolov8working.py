@@ -5,7 +5,7 @@ from PIL import Image
 # Load the YOLO model
 model = YOLO('yolov8n.pt')
 
-img = cv2.imread("dog.jpeg")
+
 
 
 
