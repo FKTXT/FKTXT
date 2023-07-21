@@ -21,7 +21,7 @@ def checkCoords(landmarks:list, ox, oy, w, h):
             if y > oy:
                 count += 1
         
-        if count > 5:
+        if count > 3:
             return True
     return False
 
@@ -29,6 +29,9 @@ handdetector = HandDetector()
 cap = cv2.VideoCapture(0)
 while 1:
     success, img = cap.read()
+
+    h, w, _ = img.shape
+
     handdetector.findHands(img, draw=False)
     landmarks = handdetector.find_Landmarks(img, draw=False)
 
@@ -39,7 +42,7 @@ while 1:
 
     result = results[0]
     classes = result.names
-
+    phones_detected = 0
 
 
     for box in result.boxes:
@@ -47,6 +50,8 @@ while 1:
         class_id = box.cls[0].item()
         if class_id != 67:
             continue
+
+        phones_detected +=1
         conf = box.conf[0].item()
 
         obje = classes[class_id]
@@ -68,5 +73,6 @@ while 1:
     # Display the output
     handdetector.findHands(img, draw=True)
     landmarks = handdetector.find_Landmarks(img, draw=True)
+    cv2.putText(img, f"phones detected: {phones_detected}", (20, h - 20), cv2.FONT_HERSHEY_COMPLEX, .6, (20, 255, 0), 2)
     cv2.imshow("Phone Detection", img)
     cv2.waitKey(1)
