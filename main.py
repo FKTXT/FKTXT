@@ -57,6 +57,7 @@ while 1:
 
         if checkCoords(landmarks, x1, y1, x2-x1, y2-y1):
             print("INJECT")
+            
             cv2.putText(img, f"Stop touching your phone. You must drive.", (20, 20), cv2.FONT_HERSHEY_COMPLEX, .6, (0, 0, 255), 2)
             #injecter.inject()
             # os.system("6. Real anti text\inject.bin")
