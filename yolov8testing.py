@@ -2,7 +2,6 @@ import argparse
 
 import cv2.dnn
 import numpy as np
-
 from ultralytics.yolo.utils import ROOT, yaml_load
 from ultralytics.yolo.utils.checks import check_yaml
 
