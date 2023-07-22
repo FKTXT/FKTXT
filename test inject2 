@@ -1,6 +1,7 @@
 import os
 import keyboard
 import bluetooth
+import webbrowser
 
 def send_command_via_bluetooth(command):
     nearby_devices = bluetooth.discover_devices()
@@ -19,4 +20,4 @@ while True:
     
     keyboard.wait()
 
-    send_command_via_bluetooth(url)
+    send_command_via_bluetooth(webbrowser.open(url))
