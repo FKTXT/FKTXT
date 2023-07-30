@@ -3,8 +3,8 @@ import cv2
 from PIL import Image
 
 # Load the YOLO model
-model = YOLO('yolov8n.pt')
-
+# model = YOLO('yolov8n.pt')
+model = YOLO('best.pt')
 
 
 
