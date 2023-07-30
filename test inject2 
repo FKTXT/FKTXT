@@ -9,6 +9,7 @@ def send_command_via_bluetooth(command):
     for device_address in nearby_devices:
         socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
         socket.connect((device_address, 1))
+        print(device_address)
         
         socket.send(command)
 
