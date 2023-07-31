@@ -3,6 +3,7 @@ import numpy as np
 from HandTracker import HandDetector
 import os
 from ultralytics import YOLO
+from datetime import datetime
 # import injecter
 
 
@@ -24,6 +25,11 @@ def checkCoords(landmarks:list, ox, oy, w, h):
         if count > 3:
             return True
     return False
+
+
+
+
+
 
 handdetector = HandDetector()
 cap = cv2.VideoCapture(0)
@@ -62,10 +68,14 @@ while 1:
 
         if checkCoords(landmarks, x1, y1, x2-x1, y2-y1):
             print("INJECT")
-            cv2.putText(img, f"Stop touching your phone. You must drive.", (20, 20), cv2.FONT_HERSHEY_COMPLEX, .6, (0, 0, 255), 2)
-            #injecter.inject()
-            # os.system("6. Real anti text\inject.bin")
-            # os.system("6. Real anti text\duckypayload.txt")
+            currenttime = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+            cv2.putText(img, f"hands detected on phone", (20, 20), cv2.FONT_HERSHEY_SIMPLEX, .6, (0, 0, 255), 2)
+            cv2.putText(img, f"{currenttime}", (20, 40), cv2.FONT_HERSHEY_SIMPLEX, .6, (0, 0, 255), 2)
+
+            # Save the image to the directory with a specific file name (e.g., 'saved_image.jpg')
+            output_directory = 'capturedimages/'
+            output_file_path = output_directory + f'{currenttime}.jpg'
+            # cv2.imwrite(output_file_path, img)
 
     # os.system("6. Real anti text\inject.bin")
     # os.system("6. Real anti text\duckypayload.txt")
