@@ -3,19 +3,19 @@ import cv2
 from PIL import Image
 
 # Load the YOLO model
-# model = YOLO('yolov8n.pt')
-model = YOLO('best.pt')
+model = YOLO('yolov8n.pt')
+# model = YOLO('best.pt')
 
 
 
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture("images/testingvid.mp4")
 while 1:
    success, img = cap.read()
    # Perform prediction on the input image
    results = model.predict(
       source=img,
-      conf=0.25
+      conf=0.25,
    )
 
    result = results[0]
