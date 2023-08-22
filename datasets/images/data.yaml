@@ -1,0 +1,6 @@
+train: W:\Code\FKTXT\FKTXT\datasets\images\train\images
+val: W:\Code\FKTXT\FKTXT\datasets\images\valid\images
+test: W:\Code\FKTXT\FKTXT\datasets\images\test\images
+
+nc: 4
+names: ['Drinking','PhoneCall', 'using_phone', 'without_using_phone']
