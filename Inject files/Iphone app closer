@@ -1,0 +1,7 @@
+import subprocess
+
+def close_current_app():
+    subprocess.run(['osascript', '-e', 'tell application "System Events" to keystroke "w" using command down'])
+
+# Close the currently  app
+close_current_app()

