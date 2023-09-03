@@ -85,6 +85,7 @@ while cap.isOpened():
                 output_directory = 'capturedimages/'
                 output_file_path = output_directory + f'{currenttime}.jpg'
                 # cv2.imwrite(output_file_path, img)
+
         else:
             print("no hands")
 

@@ -1,0 +1,24 @@
+import os
+import keyboard
+import bluetooth
+import webbrowser
+
+def send_command_via_bluetooth(command):
+    nearby_devices = bluetooth.discover_devices()
+
+    for device_address in nearby_devices:
+        socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+        socket.connect((device_address, 1))
+        print(device_address)
+        
+        socket.send(command)
+
+        socket.close()
+
+url = 'https://www.uscustomstickers.com/wp-content/uploads/2021/10/Stop-Texting-And-Driving-Sticker.png'
+
+while True:
+    
+    keyboard.wait()
+
+    send_command_via_bluetooth(webbrowser.open(url))

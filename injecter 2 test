@@ -1,3 +1,0 @@
-import subprocess
-runthismf = (bytes("Jayden's tests/test inject python"))
-subprocess.call(["python", runthismf])

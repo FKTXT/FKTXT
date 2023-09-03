@@ -1,0 +1,7 @@
+import subprocess
+
+def close_active_app():
+    command = "am kill-all"
+    subprocess.run(command, shell=True)
+    
+close_active_app()

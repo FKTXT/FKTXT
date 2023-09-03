@@ -29,16 +29,16 @@ def detect_hands():
                     cv2.circle(frame, (x, y), 5, (0, 255, 0), -1)
 
             hand_distance = calculate_hand_distance(hand_landmarks, frame.shape[1])
-            print("Distance between the hands:", hand_distance)
+            # print("Distance between the hands:", hand_distance)
 
             if hand_distance > 400:
                 inject_file()
-                time.sleep(0.5)
+                # time.sleep(0.5)
             # if distance between the two hands is more than 400 inject the code
 
         else:
             inject_file()
-            time.sleep(5)
+            # time.sleep(5)
 
         cv2.imshow('Hand Detection', frame)
 

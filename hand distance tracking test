@@ -1,6 +1,7 @@
 import cv2
 import mediapipe as mp
 import time
+import math
 
 def detect_hands():
     mp_hands = mp.solutions.hands
@@ -27,7 +28,7 @@ def detect_hands():
 
         else:
             inject_file()
-            time.sleep(5)
+            # time.sleep(5)
 
         cv2.imshow('Hand Detection', frame)
 
