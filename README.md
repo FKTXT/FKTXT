@@ -107,8 +107,7 @@ Just clone this repository into your machine.
 ### Prerequisites
 
 These prerequisites should already be preinstalled on the raspberry pi.
-* npm
-  ```sh
+* ```sh
   pip3 install mediapipe
   pip3 install YOLO
   pip3 install cv2
